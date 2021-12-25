@@ -10,19 +10,20 @@ import javax.swing.*;
 import javax.swing.RowFilter;
 import javax.swing.table.TableRowSorter;
 
+import com.codewithanas.presentation.controllers.ControllerManager;
 import com.codewithanas.presentation.models.TableModelManager;
 
 
-public abstract class DisplayTable<T> extends JFrame {
+public abstract class TableView<T, typeId> extends JFrame {
 	
 	private static final long serialVersionUID = -9072590340643165251L;
 	private JButton back,add,edit,del;
 	private JTextField search;
-	// private ControleurGestionUser controleur;
+	private ControllerManager<T, typeId> controller;
 	private TableModelManager<T> model;
 	private JTable table;
 	
-	public DisplayTable(TableModelManager<T> model) {
+	public TableView(TableModelManager<T> model) {
 		
 		setTitle("Manage");
 		setSize(700,500);
@@ -34,7 +35,7 @@ public abstract class DisplayTable<T> extends JFrame {
 		init();
 		draw();
 		System.out.println("ok draw");
-		// ajouterListeners();
+		ajouterListeners();
 	}
 	
 	private void init() {
@@ -77,13 +78,15 @@ public abstract class DisplayTable<T> extends JFrame {
 
 	}
     
-//     private void ajouterListeners(){
-//         add.addActionListener(new ActionListener() {
-//             @Override
-//             public void actionPerformed(ActionEvent e) {
-//                 controleur.genererVueAjout();
-//             }
-//         });
+     private void ajouterListeners(){
+         add.addActionListener(new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+				 controller.displayAddView();
+				 dispose();
+             }
+         });
+	}
 //         edit.addActionListener(new ActionListener() {
 			
 // 			@Override
@@ -145,13 +148,13 @@ public abstract class DisplayTable<T> extends JFrame {
 //             }
 //         });
 //     }
-    
 
-// 	public ControleurGestionUser getControleur() {
-// 		return controleur;
-// 	}
 
-// 	public void setControleur(ControleurGestionUser controleur) {
-// 		this.controleur = controleur;
-// 	}
+	public ControllerManager<T, typeId> getController() {
+		return controller;
+	}
+
+	public void setController(ControllerManager<T, typeId> controller) {
+		this.controller = controller;
+	}
 }

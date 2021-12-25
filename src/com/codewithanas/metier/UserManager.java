@@ -12,7 +12,7 @@ public class UserManager implements Manager<User, Integer>{
 	@Override
 	public User save(User object) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.save(object);
 	}
 
 	@Override

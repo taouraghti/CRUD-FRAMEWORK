@@ -1,21 +1,47 @@
 package com.codewithanas.presentation.controllers;
 
-import com.codewithanas.presentation.views.DisplayTable;
+import com.codewithanas.metier.Manager;
+import com.codewithanas.presentation.views.AddView;
+import com.codewithanas.presentation.views.TableView;
 
 public abstract class ControllerManager<T, typeId> {
 
-	private DisplayTable displayTable;
+	private TableView tableView;
+	private AddView addView;
+	private Manager manager;
 
-	public DisplayTable getDisplayTable() {
-		return displayTable;
+	public abstract void init();
+
+	public TableView getTableView() {
+		return tableView;
 	}
-
-
-	public void setDisplayTable(DisplayTable displayTable) {
+	public void setTableView(TableView tableView) {
 		System.out.println("Display invoked");
-
-		this.displayTable = displayTable;
+		this.tableView = tableView;
+	}
+	public AddView getAddView() {
+		return addView;
 	}
 
+	public void setAddView(AddView addView) {
+		this.addView = addView;
+	}
+	public void displayAll(){
+		this.tableView.setVisible(true);
+	}
+	public void displayAddView(){
+		this.addView.setVisible(true);
+	}
+
+	public void setManager(Manager manager) {
+		this.manager = manager;
+	}
+
+	public T save(T object){
+		T beanToSave = (T) manager.save(object);
+		this.init();
+		this.displayAll();
+		return beanToSave;
+	}
 	
 }
