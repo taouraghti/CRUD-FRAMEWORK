@@ -17,7 +17,6 @@ public class Main {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
         controllerManager.init();
         controllerManager.displayAll();
     }

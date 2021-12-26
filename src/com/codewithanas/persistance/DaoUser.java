@@ -29,8 +29,16 @@ public class DaoUser implements Dao<User, Integer> {
 
 	@Override
 	public Boolean deleteObject(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+
+		try{
+			Statement st = (Statement) DatabaseConnection.getInstance().getConnection().createStatement();
+			String query = "delete from user where id='"+id+"'";
+			st.executeUpdate(query);
+			return true;
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	@Override

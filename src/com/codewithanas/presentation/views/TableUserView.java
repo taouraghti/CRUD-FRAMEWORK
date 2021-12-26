@@ -1,6 +1,7 @@
 package com.codewithanas.presentation.views;
 
 import com.codewithanas.entites.User;
+import com.codewithanas.metier.UserManager;
 import com.codewithanas.presentation.controllers.ControllerUser;
 import com.codewithanas.presentation.models.TableModelManager;
 
@@ -12,6 +13,7 @@ public class TableUserView extends TableView<User, Integer> {
 		super(model);
 		this.setController(new ControllerUser());
 		this.getController().setAddView(new AddUserView());
+		this.getController().setManager(new UserManager());
 	}
 
 }

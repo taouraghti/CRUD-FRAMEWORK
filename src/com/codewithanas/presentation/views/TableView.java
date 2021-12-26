@@ -83,72 +83,31 @@ public abstract class TableView<T, typeId> extends JFrame {
              @Override
              public void actionPerformed(ActionEvent e) {
 				 controller.displayAddView();
-				 dispose();
+				 //dispose();
              }
          });
+
+		 del.addActionListener(new ActionListener() {
+			 @Override
+			 public void actionPerformed(ActionEvent e) {
+				 typeId id;
+				 int selectedRowIndex;
+				 selectedRowIndex = table.getSelectedRow();
+				 if (selectedRowIndex == -1) {
+					 JOptionPane.showMessageDialog(TableView.this, "aucune ligne selectione");
+					 return;
+				 }
+				 selectedRowIndex = table.convertRowIndexToModel(selectedRowIndex);
+				 int reponse = JOptionPane.showConfirmDialog(TableView.this, "vous voulez vraiment supprimer ?","confirmation",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+				 if(reponse == JOptionPane.YES_OPTION)
+				 {
+					 id = (typeId) model.getValueAt(selectedRowIndex, 0);
+					 controller.delete(id);
+					 dispose();
+				 }
+			 }
+		 });
 	}
-//         edit.addActionListener(new ActionListener() {
-			
-// 			@Override
-// 			public void actionPerformed(ActionEvent e) {
-				
-// 				int selectedRowIndex;
-// 				selectedRowIndex = tableUser.getSelectedRow();
-// 				if (selectedRowIndex == -1) {
-// 					JOptionPane.showMessageDialog(VueGestionUser.this, "aucune ligne selection�e");
-// 					return;
-// 				}
-// 				tableUser.convertRowIndexToModel(selectedRowIndex);
-// 				controleur.genereVueModification(tableUser.convertRowIndexToModel(selectedRowIndex));
-// 			}
-// 		});
-        
-//         del.addActionListener(new ActionListener() {
-// 			@Override
-// 			public void actionPerformed(ActionEvent e) {
-				
-// 				String cin;
-// 				int selectedRowIndex;
-// 				selectedRowIndex = tableUser.getSelectedRow();
-// 				if (selectedRowIndex == -1) {
-// 					JOptionPane.showMessageDialog(VueGestionUser.this, "aucune ligne selection�e");
-// 					return;
-// 				}
-// 				selectedRowIndex = tableUser.convertRowIndexToModel(selectedRowIndex);
-// 				int reponse = JOptionPane.showConfirmDialog(VueGestionUser.this, "vous voulez vraiment supprimer cet utilisateur?","confirmation",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-// 				if(reponse == JOptionPane.YES_OPTION)
-// 				{
-// 					cin = (String) model.getValueAt(selectedRowIndex, 0);
-// 					controleur.supprimerUser(cin);
-// 				}
-// 			}
-// 		});
-        
-//         search.addKeyListener(new KeyAdapter() {
-			
-// 			@Override
-//             public void keyTyped(KeyEvent e) {
-//                 String text = search.getText();
-//                 try{
-//                 sorter.setRowFilter(RowFilter.regexFilter(text));}
-//                 catch (PatternSyntaxException pse){
-//                     pse.getMessage();
-//                 }
-//             }
-// 		});
-        
-        
-//         back.addActionListener(new ActionListener() {
-
-//             @Override
-//             public void actionPerformed(ActionEvent e) {
-
-//                 new ControleurMenu().afficheMenu();
-//                 dispose();
-//             }
-//         });
-//     }
-
 
 	public ControllerManager<T, typeId> getController() {
 		return controller;

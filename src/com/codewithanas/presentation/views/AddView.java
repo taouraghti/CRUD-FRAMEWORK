@@ -78,6 +78,7 @@ public abstract class AddView<T, typeId> extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+                //controller.displayAll();
             }
         });
     }

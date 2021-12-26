@@ -24,7 +24,7 @@ public class UserManager implements Manager<User, Integer>{
 	@Override
 	public Boolean deleteObject(Integer id) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.deleteObject(id);
 	}
 
 	@Override

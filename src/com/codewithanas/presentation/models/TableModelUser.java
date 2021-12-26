@@ -22,7 +22,7 @@ public class TableModelUser extends TableModelManager<User> {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
 		switch(columnIndex) {
-		case 0 : return super.modelList.get(rowIndex).getId();
+		case 0 : return modelList.get(rowIndex).getId();
 		case 1 : return modelList.get(rowIndex).getName();
 		default : return null;
 		}	
