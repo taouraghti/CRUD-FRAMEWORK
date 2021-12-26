@@ -13,7 +13,6 @@ public abstract class AddView<T, typeId> extends JFrame{
     private T t;
     private T bean;
     private ControllerManager<T, typeId> controller;
-    //HashMap<String, JLabel> labelHashMap;
     HashMap<String, JTextField> textFieldHashMap;
 
     public abstract T initBean();
@@ -41,14 +40,6 @@ public abstract class AddView<T, typeId> extends JFrame{
         int i = 0;
         int y=30;
         for(Field f : fs) {
-            /*
-            labels[i] = new JLabel(f.getName());
-            textFields[i] = new JTextField();
-            labels[i].setBounds(75, y, 114, 25);
-            panel.add(labels[i]);
-            textFields[i].setBounds(235, y, 114, 25);
-            panel.add(textFields[i]);*/
-
             labels[i] = new JLabel(f.getName());
             labels[i].setBounds(75, y, 114, 25);
             panel.add(labels[i]);
@@ -78,7 +69,6 @@ public abstract class AddView<T, typeId> extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                //controller.displayAll();
             }
         });
     }

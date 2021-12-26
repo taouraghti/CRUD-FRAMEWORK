@@ -1,6 +1,5 @@
 package com.codewithanas.presentation.controllers;
 
-import com.codewithanas.entites.User;
 import com.codewithanas.metier.Manager;
 import com.codewithanas.presentation.models.TableModelManager;
 import com.codewithanas.presentation.views.AddView;

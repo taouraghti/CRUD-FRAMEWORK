@@ -3,13 +3,7 @@ package com.codewithanas.presentation.views;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.util.regex.PatternSyntaxException;
 import javax.swing.*;
-import javax.swing.RowFilter;
-import javax.swing.table.TableRowSorter;
-
 import com.codewithanas.presentation.controllers.ControllerManager;
 import com.codewithanas.presentation.models.TableModelManager;
 
