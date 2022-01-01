@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public abstract class TableModelManager<T> extends AbstractTableModel {
     protected ArrayList<T> modelList;
 
-    public TableModelManager(ArrayList<T> modelList) {
+    /*public TableModelManager(ArrayList<T> modelList) {
         super();
         this.modelList = modelList;
-    }
+    }*/
 
     @Override
     public int getRowCount() {
@@ -17,12 +17,10 @@ public abstract class TableModelManager<T> extends AbstractTableModel {
 
 
     public ArrayList<T> getModelList() {
-		return modelList;
-	}
+        return modelList;
+    }
 
-	public void setModelList(ArrayList<T> modelList) {
-		this.modelList = modelList;
-	}
-    
-
+    public void setModelList(ArrayList<T> modelList) {
+        this.modelList = modelList;
+    }
 }

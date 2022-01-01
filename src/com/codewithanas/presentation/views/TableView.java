@@ -1,6 +1,6 @@
 package com.codewithanas.presentation.views;
 
-import java.awt.SystemColor;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
@@ -9,42 +9,37 @@ import com.codewithanas.presentation.models.TableModelManager;
 
 
 public abstract class TableView<T, typeId> extends JFrame {
-	
+
 	private static final long serialVersionUID = -9072590340643165251L;
 	private JButton back,add,edit,del;
 	private JTextField search;
 	private ControllerManager<T, typeId> controller;
 	private TableModelManager<T> model;
 	private JTable table;
-	
-	public TableView(TableModelManager<T> model) {
-		
+
+	public TableView() {
 		setTitle("Manage");
 		setSize(700,500);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
-		this.model = model;
-		
-		init();
-		draw();
-		System.out.println("ok draw");
-		ajouterListeners();
 	}
-	
-	private void init() {
+
+	public void init() {
 		back = new JButton("Retour");
 		add = new JButton("Ajouter");
 		search = new JTextField();
 		table = new JTable(model);
 		edit = new JButton("Modifier");
 		del = new JButton("Supprimer");
+		draw();
+		ajouterListeners();
 	}
-	
+
 	private void draw() {
 		JScrollPane scrollPane;
 		JLabel searchlabel = new JLabel("rechercher: ");
-		
+
 		JPanel pan = (JPanel) getContentPane();
 		pan.setLayout(null);
 		back.setBounds(600,430,80,25);
@@ -71,36 +66,44 @@ public abstract class TableView<T, typeId> extends JFrame {
 		pan.add(back);
 
 	}
-    
-     private void ajouterListeners(){
-         add.addActionListener(new ActionListener() {
-             @Override
-             public void actionPerformed(ActionEvent e) {
-				 controller.displayAddView();
-				 //dispose();
-             }
-         });
 
-		 del.addActionListener(new ActionListener() {
-			 @Override
-			 public void actionPerformed(ActionEvent e) {
-				 typeId id;
-				 int selectedRowIndex;
-				 selectedRowIndex = table.getSelectedRow();
-				 if (selectedRowIndex == -1) {
-					 JOptionPane.showMessageDialog(TableView.this, "aucune ligne selectione");
-					 return;
-				 }
-				 selectedRowIndex = table.convertRowIndexToModel(selectedRowIndex);
-				 int reponse = JOptionPane.showConfirmDialog(TableView.this, "vous voulez vraiment supprimer ?","confirmation",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
-				 if(reponse == JOptionPane.YES_OPTION)
-				 {
-					 id = (typeId) model.getValueAt(selectedRowIndex, 0);
-					 controller.delete(id);
-					 dispose();
-				 }
-			 }
-		 });
+	private void ajouterListeners(){
+		add.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controller.displayAddView();
+				//dispose();
+			}
+		});
+
+		del.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				typeId id;
+				int selectedRowIndex;
+				selectedRowIndex = table.getSelectedRow();
+				if (selectedRowIndex == -1) {
+					JOptionPane.showMessageDialog(TableView.this, "aucune ligne selectione");
+					return;
+				}
+				selectedRowIndex = table.convertRowIndexToModel(selectedRowIndex);
+				int reponse = JOptionPane.showConfirmDialog(TableView.this, "vous voulez vraiment supprimer ?","confirmation",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+				if(reponse == JOptionPane.YES_OPTION)
+				{
+					id = (typeId) model.getValueAt(selectedRowIndex, 0);
+					controller.delete(id);
+					//dispose();
+				}
+			}
+		});
+	}
+
+	public TableModelManager<T> getModel() {
+		return model;
+	}
+
+	public void setModel(TableModelManager<T> model) {
+		this.model = model;
 	}
 
 	public ControllerManager<T, typeId> getController() {

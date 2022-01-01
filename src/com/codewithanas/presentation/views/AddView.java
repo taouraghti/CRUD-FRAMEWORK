@@ -10,25 +10,25 @@ import java.util.HashMap;
 
 public abstract class AddView<T, typeId> extends JFrame{
     private JButton add,cancel;
-    private T t;
-    private T bean;
+    private T fieldsNameClass;
+    // private T bean;
     private ControllerManager<T, typeId> controller;
     HashMap<String, JTextField> textFieldHashMap;
 
     public abstract T initBean();
-    public AddView(T t){
-        this.t = t;
+
+
+    public AddView(){
+
+    }
+
+    public void draw(){
         setTitle("Ajouter");
         setSize(450,450);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setResizable(false);
-        draw();
-        ajouterListeners();
-    }
-
-    private void draw(){
-        Field[] fs = t.getClass().getDeclaredFields();
+        Field[] fs = fieldsNameClass.getClass().getDeclaredFields();
 
         textFieldHashMap = new HashMap<String, JTextField>();
         JLabel[] labels = new JLabel[fs.length];
@@ -40,6 +40,7 @@ public abstract class AddView<T, typeId> extends JFrame{
         int i = 0;
         int y=30;
         for(Field f : fs) {
+
             labels[i] = new JLabel(f.getName());
             labels[i].setBounds(75, y, 114, 25);
             panel.add(labels[i]);
@@ -55,6 +56,8 @@ public abstract class AddView<T, typeId> extends JFrame{
         cancel.setBounds(338,y + 45,90,25);
         panel.add(add);
         panel.add(cancel);
+        ajouterListeners();
+
     }
 
     private void ajouterListeners(){
@@ -71,6 +74,14 @@ public abstract class AddView<T, typeId> extends JFrame{
                 dispose();
             }
         });
+    }
+
+    public T getFieldsNameClass() {
+        return fieldsNameClass;
+    }
+
+    public void setFieldsNameClass(T fieldsNameClass) {
+        this.fieldsNameClass = fieldsNameClass;
     }
 
     public ControllerManager<T, typeId> getController() {

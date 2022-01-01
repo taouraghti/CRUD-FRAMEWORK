@@ -7,7 +7,7 @@ import com.codewithanas.presentation.views.TableView;
 
 import java.util.ArrayList;
 
-public abstract class ControllerManager<T, typeId> {
+public class ControllerManager<T, typeId> {
 
 	private TableView tableView;
 	private AddView addView;
@@ -15,7 +15,10 @@ public abstract class ControllerManager<T, typeId> {
 	protected ArrayList<T> listObjects;
 	protected TableModelManager<T> model;
 
-	public abstract void init();
+	public void init(){
+		this.listObjects = this.manager.getAll();
+		this.model.setModelList(this.listObjects);
+	}
 
 	public void setTableView(TableView tableView) {
 		System.out.println("Display invoked");
@@ -31,16 +34,18 @@ public abstract class ControllerManager<T, typeId> {
 	}
 
 	public void displayAll(){
+		this.init();
+		this.tableView.init();
 		this.tableView.setVisible(true);
 	}
+
 	public void displayAddView(){
+		this.addView.draw();
 		this.addView.setVisible(true);
 	}
 
-
 	public T save(T object){
 		T beanToSave = (T) manager.save(object);
-		this.init();
 		this.displayAll();
 		return beanToSave;
 	}
@@ -48,7 +53,35 @@ public abstract class ControllerManager<T, typeId> {
 	public void delete(typeId id)
 	{
 		manager.deleteObject(id);
-		this.init();
+		this.tableView.dispose();
 		this.displayAll();
+	}
+
+	public TableView getTableView() {
+		return tableView;
+	}
+
+	public AddView getAddView() {
+		return addView;
+	}
+
+	public Manager getManager() {
+		return manager;
+	}
+
+	public ArrayList<T> getListObjects() {
+		return listObjects;
+	}
+
+	public void setListObjects(ArrayList<T> listObjects) {
+		this.listObjects = listObjects;
+	}
+
+	public TableModelManager<T> getModel() {
+		return model;
+	}
+
+	public void setModel(TableModelManager<T> model) {
+		this.model = model;
 	}
 }
