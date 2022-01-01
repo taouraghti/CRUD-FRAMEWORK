@@ -17,20 +17,19 @@ public abstract class ControllerManager<T, typeId> {
 
 	public abstract void init();
 
-	public TableView getTableView() {
-		return tableView;
-	}
-
 	public void setTableView(TableView tableView) {
 		System.out.println("Display invoked");
 		this.tableView = tableView;
 	}
-	public AddView getAddView() {
-		return addView;
-	}
+
 	public void setAddView(AddView addView) {
 		this.addView = addView;
 	}
+
+	public void setManager(Manager manager) {
+		this.manager = manager;
+	}
+
 	public void displayAll(){
 		this.tableView.setVisible(true);
 	}
@@ -38,9 +37,6 @@ public abstract class ControllerManager<T, typeId> {
 		this.addView.setVisible(true);
 	}
 
-	public void setManager(Manager manager) {
-		this.manager = manager;
-	}
 
 	public T save(T object){
 		T beanToSave = (T) manager.save(object);
